@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <title>hydra + ffmpeg local</title>
+</head>
+
+<body>
+  <h1>upload ur video!!!!</h1>
+  <input id="videoFile" type="file" accept="video/*" />
+  <video controls id="videoDisplay"></video>
+  <canvas id="videoCanvas" style="display:none; object-fit: contain;" width="640" height="480"></canvas>
+  <h1>Give me ur damn hydra code</h1>
+  <textarea id="hydraInput"></textarea>
+  <button id="previewButton" onclick="previewClick()">Preview</button>
+  <button id="renderButton" onclick="uploadClick()">Render</button>
+  <canvas id="hydraCanvas" width="1280" height="720"
+    style="width: 100%; height: 100%; image-rendering: pixelated;"></canvas>
+  <video id="speedVideo" controls></video>
+  <script>
+    // small runtime shims some libs expect
+    if (typeof global === 'undefined') window.global = window;
+    if (typeof globalThis === 'undefined') window.globalThis = window;
+    if (typeof window.process === 'undefined') window.process = { env: {} };
+  </script>
+
+  <!-- load hydra and ffmpeg UMD wrapper from public/libs -->
+  <script src="https://cdn.jsdelivr.net/npm/hydra-synth/dist/hydra-synth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/esm"></script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
