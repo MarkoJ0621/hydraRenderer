@@ -1,2 +1,40 @@
-./backend/uploads
-./backend/rendered
+# Ignore backend runtime uploads and rendered outputs
+backend/uploads/
+backend/rendered/
+
+# Node / frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Vite dev server cache
+.vite/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+
+# macOS Finder files
+.Spotlight-V100
+.Trashes
+
+# dotenv
+.env
+.env.local
+.env.*.local

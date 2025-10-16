@@ -9,17 +9,24 @@
 </head>
 
 <body>
-  <h1>upload ur video!!!!</h1>
-  <input id="videoFile" type="file" accept="video/*" />
-  <video controls id="videoDisplay"></video>
-  <canvas id="videoCanvas" style="display:none; object-fit: contain;" width="640" height="480"></canvas>
-  <h1>Give me ur damn hydra code</h1>
-  <textarea id="hydraInput"></textarea>
-  <button id="previewButton" onclick="previewClick()">Preview</button>
+  <div id="allUploads">
+    <div class="upload">
+      <h1>upload ur video!!!!</h1>
+      <input id="videoFile" type="file" accept="video/*" />
+      <video controls id="videoDisplay"></video>
+    </div>
+    <canvas id="videoCanvas" style="display:none; object-fit: contain;" width="640" height="480"></canvas>
+    <div class="upload">
+      <h1>Give me ur damn hydra code</h1>
+      <textarea id="hydraInput"></textarea>
+    </div>
+  </div>
+  </div>
+  <button id="previewButton" onclick="renderClick()">Render</button>
   <button id="renderButton" onclick="uploadClick()">Render</button>
   <canvas id="hydraCanvas" width="1280" height="720"
     style="width: 100%; height: 100%; image-rendering: pixelated;"></canvas>
-  <video id="speedVideo" controls></video>
+  <video id="speedVideo" controls disp></video>
   <script>
     // small runtime shims some libs expect
     if (typeof global === 'undefined') window.global = window;

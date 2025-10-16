@@ -10,6 +10,8 @@ let vidRecorder, chunks = [];
 // --------------------
 document.getElementById('videoFile').addEventListener('change', e => {
   selectedFile = e.target.files[0];
+  videoEl.src = selectedFile;
+  videoEl.style = "display: block";
 });
 
 // --------------------
@@ -68,7 +70,7 @@ function stopRecording() {
 // --------------------
 // Main preview
 // --------------------
-export async function previewClick() {
+export async function renderClick() {
   if (!selectedFile) return alert('Please choose a video file first');
   const speedVideo = document.getElementById('speedVideo');
   if (!speedVideo) return alert('Missing #speedVideo element in DOM');
@@ -113,7 +115,7 @@ export async function previewClick() {
     // Process with Hydra and record. Pass the video element itself so Hydra can use it as a source.
     processWithHydra(speedVideo, speedFactor);
   } catch (err) {
-    console.error('previewClick error', err);
+    console.error('renderClick error', err);
     alert('Error: ' + (err?.message || String(err)));
   }
 }
@@ -122,8 +124,8 @@ export async function previewClick() {
 // Button click
 // --------------------
 
-// Expose previewClick for inline handlers
-window.previewClick = previewClick;
+// Expose renderClick for inline handlers
+window.renderClick = renderClick;
 
 // --------------------
 // Hydra processing + recording
