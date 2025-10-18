@@ -142,6 +142,8 @@ app.post('/api/speedup', async (req, res) => {
         const outDir = path.join(__dirname, 'rendered');
         fs.mkdirSync(outDir, { recursive: true });
         const outName = `${Date.now()}-${path.basename(filename, path.extname(filename))}-sped.mp4`;
+        const outAudioName = `${Date.now()}-${path.basename(filename, path.extname(filename))}.mp3`;
+        const outAudioPath = path.join(outDir,outAudioName);
         const outPath = path.join(outDir, outName);
 
         const ratio = 1 / speed;
@@ -175,7 +177,7 @@ app.post('/api/speedup', async (req, res) => {
 module.exports = app;
 
 
-module.exports = app;
+
 
 
 // Endpoint to trigger encoding of uploaded frames for a run
@@ -230,7 +232,10 @@ app.post('/api/speedup', async (req, res) => {
             '-pix_fmt', 'yuv420p',
             outPath
         ];
+        const ffmpegArgs2 = [
+            '-i', inPath,
 
+        ]
         await new Promise((resolve, reject) => {
             const p = spawn('ffmpeg', ffmpegArgs, { stdio: 'inherit' });
             p.on('close', code => code === 0 ? resolve() : reject(new Error(`ffmpeg exited with code ${code}`)));
