@@ -2,7 +2,6 @@ let selectedFile = null;
 
 const videoEl = document.getElementById('videoDisplay');
 const canvas = document.getElementById('hydraCanvas');
-
 let vidRecorder, chunks = [];
 
 // --------------------
@@ -10,16 +9,18 @@ let vidRecorder, chunks = [];
 // --------------------
 document.getElementById('videoFile').addEventListener('change', e => {
   selectedFile = e.target.files[0];
-  videoEl.src = selectedFile;
+  videoEl.src = selectedFile.src;
   videoEl.style = "display: block";
 });
+
+
 
 // --------------------
 // MediaRecorder setup
 // --------------------
 function setupRecorder(speedFactor = 10) {
   const canvas = document.getElementById('hydraCanvas');
-  const stream = canvas.captureStream(60); // 60 FPS
+  const stream = canvas.captureStream(240); //240 fps so when it gets slowed back down it slows down to 24fps :D
 
   vidRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
   chunks = [];
