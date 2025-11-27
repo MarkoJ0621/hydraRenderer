@@ -61,9 +61,10 @@ app.post('/upload-hydra', upload2.single('video'), async (req, res) => {
         // FFmpeg args: slow video only, ignore audio
         const ffmpegArgs = [
             '-y',
+            '-r', '240',            // treat input as 240 fps (override metadata)
             '-i', inPath,
-            '-filter:v', `setpts=${speedFactor / 2}*PTS`,
-            '-an',                         // drop audio
+            '-filter:v', `setpts=${speedFactor / 4}*PTS,fps=24`, // slow down and lock 24fps
+            '-an',
             '-c:v', 'libx264',
             '-crf', '18',
             '-preset', 'fast',
@@ -143,7 +144,7 @@ app.post('/api/speedup', async (req, res) => {
         fs.mkdirSync(outDir, { recursive: true });
         const outName = `${Date.now()}-${path.basename(filename, path.extname(filename))}-sped.mp4`;
         const outAudioName = `${Date.now()}-${path.basename(filename, path.extname(filename))}.mp3`;
-        const outAudioPath = path.join(outDir,outAudioName);
+        const outAudioPath = path.join(outDir, outAudioName);
         const outPath = path.join(outDir, outName);
 
         const ratio = 1 / speed;
